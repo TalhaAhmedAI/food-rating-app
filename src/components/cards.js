@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import Card from "react-bootstrap/Card";
+import { v4 as uuidv4 } from "uuid";
+
+import Food from "./food";
 
 const Cards = ({ response }) => {
-  const [results, setResults] = useState([]);
-  if (response) {
-    setResults(response.data.hits);
-  }
+  const [foods, setFoods] = useState([]);
+  useEffect(() => {
+    if (response) {
+      setFoods(response.data.hits);
+    }
+  }, [response]);
+
   return (
     <div>
-      {results ? (
-        results.map((result) => <h1>{result.recipe.label}</h1>)
+      {foods !== [] ? (
+        foods.map((food) => <Food key={uuidv4()} food={food} />)
       ) : (
-        <h1>No results</h1>
+        <h1>Loading</h1>
       )}
     </div>
   );
