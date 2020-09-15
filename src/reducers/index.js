@@ -7,13 +7,6 @@ const submitLocationReducer = (location = null, action) => {
   return location;
 };
 
-const submitFoodReducer = (food = null, action) => {
-  if (action.type === "SUBMIT_FOOD") {
-    return action.payload;
-  }
-  return food;
-};
-
 const fetchFoodReducer = (response = null, action) => {
   if (action.type === "FETCH_FOOD") {
     return action.payload;
@@ -23,6 +16,5 @@ const fetchFoodReducer = (response = null, action) => {
 
 export default combineReducers({
   location: submitLocationReducer,
-  food: submitFoodReducer,
   response: fetchFoodReducer,
 });

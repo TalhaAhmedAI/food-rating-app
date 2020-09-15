@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
-import { submitFood, fetchFood } from "../actions";
+import { fetchFood } from "../actions";
 
 const FoodForm = (props) => {
   const [formValue, setFormValue] = useState("");
@@ -41,4 +41,4 @@ const FoodForm = (props) => {
   );
 };
 
-export default connect(null, { submitFood, fetchFood })(FoodForm);
+export default connect(null, { fetchFood })(FoodForm);

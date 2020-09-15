@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 
 import Food from "./food";
 
@@ -9,17 +12,26 @@ const Cards = ({ response }) => {
   useEffect(() => {
     if (response) {
       setFoods(response.data.hits);
+      console.log(foods);
     }
-  }, [response]);
+  }, [response, foods]);
 
   return (
-    <div>
-      {foods !== [] ? (
-        foods.map((food) => <Food key={uuidv4()} food={food} />)
-      ) : (
-        <h1>Loading</h1>
-      )}
-    </div>
+    <Container>
+      <Row>
+        {foods !== [] ? (
+          foods.map((food, index) => (
+            <Col key={index} sm={12} md={6} lg={4}>
+              <Link to={`/ratings/${index}`}>
+                <Food food={food} />
+              </Link>
+            </Col>
+          ))
+        ) : (
+          <h1>Loading</h1>
+        )}
+      </Row>
+    </Container>
   );
 };
 
